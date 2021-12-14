@@ -1,0 +1,23 @@
+{
+  "name": "logstudy",
+  "version": "1.0.0",
+  "description": "logstudy",
+  "main": "index.js",
+  "scripts": {
+    "test": ":"
+  },
+  "author": "Andre 'Staltz' Medeiros",
+  "license": "MIT",
+  "dependencies": {
+    "async-append-only-log": "^3.1.1",
+    "bipf": "^1.5.4",
+    "jitdb": "^4.0.0",
+    "level": "^6.0.1",
+    "ora": "5.x",
+    "secret-stack": "^6.4.0",
+    "ssb-caps": "^1.1.0",
+    "ssb-db2": "^2.8.2",
+    "ssb-keys": "^8.2.0",
+    "ssb-keys-mnemonic": "^1.0.1"
+  }
+}
