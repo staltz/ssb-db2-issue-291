@@ -17,7 +17,10 @@
     "secret-stack": "^6.4.0",
     "ssb-caps": "^1.1.0",
     "ssb-db2": "^2.8.2",
+    "ssb-friends": "^5.1.0",
     "ssb-keys": "^8.2.0",
-    "ssb-keys-mnemonic": "^1.0.1"
+    "ssb-keys-mnemonic": "^1.0.1",
+    "ssb-search2": "^1.0.1",
+    "ssb-threads": "^9.2.0"
   }
 }
