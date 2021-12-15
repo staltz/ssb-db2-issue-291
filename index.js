@@ -3,7 +3,19 @@ const caps = require('ssb-caps');
 const Keys = require('ssb-keys');
 const Mnemonic = require('ssb-keys-mnemonic');
 const readline = require('readline');
-const {where, and, type, toCallback} = require('ssb-db2/operators');
+const {
+  where,
+  or,
+  type,
+  author,
+  hasRoot,
+  hasFork,
+  isRoot,
+  isPrivate,
+  isPublic,
+  votesFor,
+  toCallback,
+} = require('ssb-db2/operators');
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -25,11 +37,32 @@ rl.on('line', (userInput) => {
 
   const sbot = SecretStack({caps})
     .use(require('ssb-db2'))
+    .use(require('ssb-db2/about-self'))
+    .use(require('ssb-db2/compat/ebt'))
+    .use(require('ssb-db2/full-mentions'))
+    .use(require('ssb-friends'))
+    .use(require('ssb-threads'))
+    .use(require('ssb-search2'))
     .call(null, {path: __dirname, keys});
 
   setTimeout(() => {
     sbot.db.query(
-      where(and(type('post'))),
+      where(
+        or(
+          type('contact'),
+          type('post'),
+          type('pub'),
+          type('room/alias'),
+          type('vote'),
+          votesFor('NOTHING'),
+          hasRoot('NOTHING'),
+          hasFork('NOTHING'),
+          isRoot(),
+          isPrivate(),
+          isPublic(),
+          author('@NOTHINGNOTHINGNOTHINGNOTHINGNTOHING', {dedicated: false}),
+        ),
+      ),
       toCallback((err, msgs) => {
         console.log('Indexes rebuilt! They should be now in ./db2/indexes');
         sbot.close();
