@@ -31,7 +31,8 @@ rl.on('line', (userInput) => {
   if (gotIt) return;
   else gotIt = true;
 
-  const keys = Mnemonic.wordsToKeys(userInput);
+  const keys =
+    userInput.length > 10 ? Mnemonic.wordsToKeys(userInput) : Keys.generate();
   console.log('\nYour ID is', keys.id);
   console.log('\nRebuilding indexes...');
 
