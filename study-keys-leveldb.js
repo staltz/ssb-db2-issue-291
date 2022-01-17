@@ -58,12 +58,14 @@ const seqIndexPath = Path.join(__dirname, 'db2', 'indexes', 'seq.index');
     let minBrokenSeq = Number.MAX_SAFE_INTEGER;
 
     const dataset = [];
+    const processing = new Set();
 
     keysLevel
       .createReadStream({keys: true, values: true})
       .on('data', (data) => {
         if (data.key === '\x00') return;
         const actualKey = data.key;
+        processing.add(actualKey);
         const seq = parseInt(data.value, 10);
         const offset = seqIndex.tarr[seq];
         log.get(offset, (err, record) => {
@@ -87,12 +89,17 @@ const seqIndexPath = Path.join(__dirname, 'db2', 'indexes', 'seq.index');
             dataset.push({actualKey, expectedKey, offset, seq});
             // spinner.text = `Validated key ${actualKey} ${seq}`;
           }
+          processing.delete(actualKey);
         });
       })
       .on('error', (err) => {
         spinner.fail(err);
       })
-      .on('end', () => {
+      .on('end', function end() {
+        if (processing.size > 0) {
+          setTimeout(end, 1000);
+          return;
+        }
         spinner.succeed('Level stream ended');
         const minBrokenOffset = seqIndex.tarr[minBrokenSeq];
         console.log('\nminBrokenSeq =', minBrokenSeq);
