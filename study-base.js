@@ -14,7 +14,7 @@ const baseIndexPath = Path.join(__dirname, 'db2', 'indexes', 'base');
       await promisify(baseLevel.get.bind(baseLevel))('\x00'),
     );
     console.log(
-      `Loaded keys leveldb with:\n` +
+      `Loaded base leveldb with:\n` +
         `  Version: ${meta.version}\n` +
         `  Entries: ${meta.processed}\n` +
         `  Offset: ${meta.offset}\n`,

@@ -5,11 +5,7 @@ const Level = require('level');
 const AAOL = require('async-append-only-log');
 const ora = require('ora');
 const promisify = require('util').promisify;
-const {
-  loadBitsetFile,
-  loadPrefixMapFile,
-  loadTypedArrayFile,
-} = require('jitdb/files');
+const {loadTypedArrayFile} = require('jitdb/files');
 
 const logPath = Path.join(__dirname, 'db2', 'log.bipf');
 const keysIndexPath = Path.join(__dirname, 'db2', 'indexes', 'keys');
@@ -103,7 +99,7 @@ const seqIndexPath = Path.join(__dirname, 'db2', 'indexes', 'seq.index');
         console.log('minBrokenOffset =', minBrokenOffset);
 
         if (FS.existsSync('study.txt')) {
-          FS.unlinkSync('study.txt')
+          FS.unlinkSync('study.txt');
         }
         const stream = FS.createWriteStream('study.txt', {flags: 'a'});
         dataset
