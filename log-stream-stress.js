@@ -29,9 +29,9 @@ setTimeout(() => {
   const lines = keysStored.split('\n');
   let i = 0;
 
-  sbot.db
-    .getLog()
-    .stream({gt: 0})
+  const stream = sbot.db.getLog().stream({gt: 0});
+
+  stream
     .pipe({
       paused: false,
       write(record) {
@@ -57,12 +57,9 @@ setTimeout(() => {
       },
     });
 
-  sbot.db
-    .getLog()
-    .stream({gt: 0})
-    .pipe({
-      paused: false,
-      write(record) {},
-      end() {},
-    });
+  setTimeout(function forceIt() {
+    console.log('force stream.resume()')
+    stream.resume();
+    setTimeout(forceIt, Math.random()*200);
+  }, 20);
 }, 1000);
