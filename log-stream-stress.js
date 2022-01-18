@@ -54,6 +54,7 @@ setTimeout(() => {
       end() {
         if (!verifyMode) fileStream.end();
         sbot.close(true);
+        process.exit(0);
       },
     });
 
