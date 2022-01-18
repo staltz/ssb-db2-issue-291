@@ -57,9 +57,11 @@ setTimeout(() => {
       },
     });
 
-  setTimeout(function forceIt() {
-    console.log('force stream.resume()')
-    stream.resume();
-    setTimeout(forceIt, Math.random()*200);
-  }, 20);
+  if (verifyMode) {
+    setTimeout(function forceIt() {
+      console.log('force stream.resume()')
+      stream.resume();
+      setTimeout(forceIt, Math.random()*200);
+    }, 20);
+  }
 }, 1000);
