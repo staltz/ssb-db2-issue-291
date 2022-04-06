@@ -9,22 +9,22 @@
   "author": "Andre 'Staltz' Medeiros",
   "license": "MIT",
   "dependencies": {
-    "async-append-only-log": "3.1.1",
-    "bipf": "1.5.5",
+    "async-append-only-log": "4.1.0",
+    "bipf": "1.6.1",
     "deep-equal": "^2.0.5",
     "flumecodec": "0.0.1",
     "flumelog-offset": "3.4.4",
-    "jitdb": "4.0.1",
+    "jitdb": "6.4.0",
     "level": "^6.0.1",
     "ora": "5.x",
     "pull-stream": "3.6.14",
     "secret-stack": "6.4.0",
     "ssb-caps": "1.1.0",
-    "ssb-db2": "2.8.5",
-    "ssb-friends": "5.1.0",
+    "ssb-db2": "3.4.0",
+    "ssb-friends": "5.1.1",
     "ssb-keys": "^8.2.0",
     "ssb-keys-mnemonic": "^1.0.1",
-    "ssb-search2": "^1.0.1",
-    "ssb-threads": "^9.2.0"
+    "ssb-search2": "1.0.3",
+    "ssb-threads": "9.4.1"
   }
 }
